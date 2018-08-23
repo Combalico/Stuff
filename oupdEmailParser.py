@@ -15,7 +15,7 @@ with open('ok.eml') as data:
     macLocation = eggs.find("Physical Address (MAC)")
     deviceLocation = eggs.find("Device type")
     deviceDescLocation = eggs.find("Device Description (Model / OS)")
-    netRegLocation = eggs.find("Other important information <br>")
+    netRegLocation = eggs.find("Registered With NetReg? (Net-reg.ou.edu)")
     otherInfoLocation = eggs.find("Other important information")
 
     #start with the document, and trim it from your date point and onward
@@ -49,11 +49,10 @@ with open('ok.eml') as data:
     deviceDescPlace = deviceDescHtml.find(blnkspc)
     deviceDescription = deviceDescHtml[deviceDescPlace + 18: deviceDescHtml.find(br)]
 
-    netHtml = eggs[netRegLocation:end]
-    netPlace = netHtml.find(blnkspc)
-    netregRegistration = netHtml[netPlace + 18: netHtml.find(br)]
+    netHtml = eggs[netRegLocation + 46:end]
+    netregRegistration = netHtml[0: netHtml.find(br)]
 
-    otherHtml = eggs[otherInfoLocation:end]
+    otherHtml = eggs[otherInfoLocation + 32:end]
     otherPlace = otherHtml.find(blnkspc)
     otherInfo = otherHtml[otherPlace + 18: otherHtml.find(br)]
 
