@@ -1,10 +1,13 @@
+#open file
 with open('ok.eml') as data:
+    #turn file into a stirng variable
     eggs = data.read()
-
+    #these variables will be useful in parsing information; start/end of html as well as some strings to use in find()
     start = eggs.find("<html>")
     end = eggs.find("</html>")
     blnkspc = "&nbsp;&nbsp;&nbsp;"
     br = "<br>"
+    #find the location of each selected field in the email
     caseIDLocation = eggs.find("OUPD Case ID No.")
     dateStolenLocation = eggs.find("Date Stolen")
     reportingUserLocation = eggs.find("Reporting User First/Last Name")
@@ -15,9 +18,11 @@ with open('ok.eml') as data:
     netRegLocation = eggs.find("Other important information <br>")
     otherInfoLocation = eggs.find("Other important information")
 
-
+    #start with the document, and trim it from your date point and onward
     caseHtml = eggs[caseIDLocation:end]
+    #find the first case of our triple blankspace, and our info should be between the spaces and the <br>
     caseIDPlace = caseHtml.find(blnkspc)
+    #We add 18 characters so we dont have "&nbsp;&nbsp;&nbsp;" in each of our fields
     caseID = caseHtml[caseIDPlace + 18: caseHtml.find(br)]
 
     dateHtml = eggs[dateStolenLocation:end]
