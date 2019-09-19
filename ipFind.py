@@ -45,7 +45,7 @@ else:
         if element == '':
             networkinfo[i] = "Not Reported"
         i += 1
-
+# define array objects for readability
 Classification = networkinfo[0]
 CIDR = networkinfo[1]
 Nmask = networkinfo[2]
